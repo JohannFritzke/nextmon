@@ -1,4 +1,4 @@
-# <img src="public/sprites/25.png" width="30" height="30"> NextMon  
+# NextMon  
 
 **Uma Pokédex moderna** construída com Next.js, exibindo informações detalhadas sobre Pokémon, incluindo stats, habilidades, movimentos e formas regionais — com sprites personalizados.
 
