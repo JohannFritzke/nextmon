@@ -7,7 +7,7 @@ export function PokeCards({ pokemon }: { pokemon: Pokemon }) {
   const number = pokemon.id.toString().padStart(3, "0");
 
   return (
-    <div className="bg-white/5 w-36 place-items-center p-2 shadow-white/20 shadow-sm">
+    <div className="bg-white/5 w-36 h-48 place-items-center p-2 shadow-white/20 shadow-sm">
       {/*----------------------------Imagem do Pokemon----------------------------*/}
       <div className="flex justify-center">
         <div
