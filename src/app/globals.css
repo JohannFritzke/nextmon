@@ -176,6 +176,13 @@
   background-color: color-mix(in oklab, #e9e 30%, transparent);
 }
 
+.bg-hp{ background-color: #FF5959;}
+.bg-attack{ background-color: #F5AC78;}
+.bg-defense{ background-color: #FAE078;}
+.bg-special-attack{ background-color: #9DB7F5;}
+.bg-special-defense{ background-color: #A7DB8D;}
+.bg-speed{ background-color: #FA92B2;}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

@@ -1,6 +1,6 @@
 import { Pokemon } from "@/app/api/pokeAPI";
 import Image from "next/image";
-import wList from "./exceptions.json"
+import { cleanName } from "@/app/api/pokeAPI";
 
 
 export function PokeCards({ pokemon }: { pokemon: Pokemon }) {
@@ -38,12 +38,4 @@ export function PokeCards({ pokemon }: { pokemon: Pokemon }) {
       
     </div>
   );
-}
-
-function cleanName(name:string){
-    if(wList.exceptions.includes(name)){
-        return name;
-    }
-
-    return name.split('-')[0];
 }

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 
 import { Pokemon } from "@/app/api/pokeAPI";
+import Link from "next/link";
 
 const MAX_POKEMON = 1025;
 export function Content() {
@@ -49,7 +50,9 @@ export function Content() {
     <>
       <main className="grid grid-cols-8 gap-4 p-6 place-items-center">
         {pokemons.map((p) => (
-          <PokeCards pokemon={p} key={p.id} />
+          <Link href={`/pokemon/${p.name}`}  key={p.id}>
+            <PokeCards pokemon={p}/>
+          </Link>
         ))}
       </main>
       <PaginationList
