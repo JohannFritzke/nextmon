@@ -39,7 +39,7 @@ export function Content() {
     return (
       <div className="grid grid-cols-8 gap-4 p-6 place-items-center">
         {Array.from({ length: 48 }, (_, i) => {
-          return <Skeleton className="w-36 h-48" key={i} />;
+          return <Skeleton className="w-36 h-48 bg-white/10" key={i} />;
         })}
       </div>
     );

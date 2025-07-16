@@ -76,7 +76,7 @@ export function PaginationList({
           <PaginationPrevious
             href={createPageURL(Math.max(1, currentPage - 1))}
             aria-disabled={isFirstPage}
-            className={`dark:hover:bg-white/30  ${isFirstPage ? "opacity-50 cursor-not-allowed" : "" }`}
+            className={isFirstPage ? "opacity-50 cursor-not-allowed dark:hover:bg-transparent" : "dark:hover:bg-white/30" }
             onClick={(e) => {
               if (isFirstPage) {
                 e.preventDefault(); // Impede a navegação
@@ -87,7 +87,7 @@ export function PaginationList({
 
         {/* Primeira página */}
         <PaginationItem>
-          <PaginationLink href={createPageURL(1)} isActive={1 === currentPage}>
+          <PaginationLink href={createPageURL(1)} isActive={1 === currentPage} className="dark:hover:bg-white/30">
             1
           </PaginationLink>
         </PaginationItem>
@@ -132,7 +132,7 @@ export function PaginationList({
           <PaginationNext
             href={createPageURL(Math.min(totalPages, currentPage + 1))}
             aria-disabled={isLastPage}
-            className={`dark:hover:bg-white/30 ${isLastPage ? "opacity-50 cursor-not-allowed" : ""}`}
+            className={isLastPage ? "opacity-50 cursor-not-allowed dark:hover:bg-transparent" : "dark:hover:bg-white/30"}
             onClick={(e) => {
               if (isLastPage) {
                 e.preventDefault(); // Impede a navegação
