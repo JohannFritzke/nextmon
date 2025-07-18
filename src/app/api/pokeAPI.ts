@@ -73,3 +73,18 @@ export function cleanName(name:string){
 
     return name.split('-')[0];
 }
+
+export async function GetSpecies(url:string){
+  const resp = await fetch(url).then((r)=>r.json())
+
+  return resp
+}
+
+export function getEV(stats: any[]){
+  return stats.filter(stat => stat.effort > 0).map(s => (
+    {
+      type: s.stat.name,
+      value: s.effort
+    }
+  ))
+}
