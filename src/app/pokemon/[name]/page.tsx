@@ -6,6 +6,7 @@ import { Sparkles } from "lucide-react";
 import { BaseStats } from "@/components/baseStats/baseStats";
 import { InfoTable } from "@/components/infoTable/infoTable";
 import { Type } from "@/app/api/tipagens";
+import { EvolutionChain } from "@/components/evolutionChain/evolutionChain";
 
 export default async function pokePage({
   params,
@@ -16,8 +17,6 @@ export default async function pokePage({
   const number = pokemon.id.toString().padStart(3, "0");
   const type = pokemon.types[0].type.name;
   const dir = "normal";
-
-  console.log(pokemon);
   return (
     <div className="flex flex-col justify-center">
       <Header />
@@ -68,6 +67,8 @@ export default async function pokePage({
           <div className="bg-gray-800 h-40 rounded-md p-2">
             <InfoTable pokemon={pokemon} />
           </div>
+
+          <EvolutionChain url={pokemon.species.url}/>
         </div>
       </main>
 

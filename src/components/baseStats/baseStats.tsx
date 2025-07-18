@@ -21,7 +21,7 @@ export function BaseStats({pokeStats}:{pokeStats:Stats[]}) {
                 </td>
                 <td className="w-[100px] py-1">
                   <div
-                    style={{ width: `${statPercentage}%` }}
+                    style={{ width: `${statPercentage*1.3}%` }}
                     className={`h-3 rounded-2xl bg-${s.stat.name}`}
                   ></div>
                 </td>

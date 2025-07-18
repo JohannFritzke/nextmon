@@ -27,7 +27,7 @@ export async function InfoTable({ pokemon }: { pokemon: PokemonProps }) {
 
     const femalePercentage = (rate / 8) * 100;
     const malePercentage = 100 - femalePercentage;
-
+    
     return (
       <span className="flex flex-col text-gray-500">
         <span>{malePercentage}% male</span>
@@ -37,7 +37,7 @@ export async function InfoTable({ pokemon }: { pokemon: PokemonProps }) {
   };
 
   return (
-    <table className="w-full table-fixed border-separate border-spacing-x-8">
+    <table className="w-full table-fixed border-separate border-spacing-x-5">
       <thead>
         <tr className="text-sm">
           <th className="border-b font-normal">Pokedex</th>
@@ -70,7 +70,7 @@ export async function InfoTable({ pokemon }: { pokemon: PokemonProps }) {
           </td>
 
           <td>
-            <div className="pt-1 capitalize text-gray-300 align-text-top flex flex-col">
+            <div className="pt-1 capitalize text-gray-300 align-text-top flex flex-col gap-1">
               <span>
                 EV yield:{" "}
                 {evs.map((ev, index) => (
@@ -101,7 +101,7 @@ export async function InfoTable({ pokemon }: { pokemon: PokemonProps }) {
             </div>
           </td>
 
-          <td className="pt-1 capitalize text-gray-300 align-text-top flex flex-col">
+          <td className="pt-1 capitalize text-gray-300 align-text-top flex flex-col gap-1">
             <div>
               <span>Egg Groups: </span>
               <span className="text-gray-500">

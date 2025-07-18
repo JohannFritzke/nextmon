@@ -122,6 +122,7 @@ export function PaginationList({
             <PaginationLink
               href={createPageURL(totalPages)}
               isActive={totalPages === currentPage}
+              className="dark:hover:bg-white/30"
             >
               {totalPages}
             </PaginationLink>
