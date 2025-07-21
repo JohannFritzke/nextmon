@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { EvolutionIcon } from "../evoIcon/evoIcon";
 import {
   GetEvolutionChain,
   getEvolutionDetails,
