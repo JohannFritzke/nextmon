@@ -9,7 +9,6 @@ export type Type = {
     url: string;
   };
 };
-
 export type PokemonProps = {
   species: { url: string };
   base_experience: number;
@@ -25,32 +24,43 @@ export type PokemonProps = {
   }[];
 };
 
-export interface EvolutionDetails {
-  trigger: string;
-  min_level?: number;
-  item?: string;
-  min_happiness?: number;
-  min_affection?: number;
-  time_of_day?: string;
-  known_move?: {
+export interface PokemonStage {
+  species: {
     name: string;
-  }
-  held_item?: {
-    name: string
+    url: string;
   };
-  location?: string;
-  needs_rain?: boolean;
-  upside_down?: boolean;
+  evolution_details?: EvolutionDetails[];
+  evolves_to?: PokemonStage[];
 }
 
-export interface EvolutionStage {
-  id: number;
+interface EvolutionStage {
+  id?: number;
   name: string;
-  evolution_details?: EvolutionDetails;
+  url: string;
+  evolution_details?: EvolutionDetails[];
 }
+export type EvolutionList = [
+  { stage1: EvolutionStage[] },
+  { stage2: EvolutionStage[] },
+  { stage3: EvolutionStage[] }
+];
 
-export interface EvoChain {
-  stage1: EvolutionStage;
-  stage2?: EvolutionStage;
-  stage3?: EvolutionStage;
+export interface EvolutionDetails {
+  gender: number
+  min_level: string;
+  min_happiness: string;
+  held_item:{
+    name: string
+  }
+  known_move_type: {
+    name: string;
+  };
+  item?: {
+    name: string;
+  };
+  time_of_day?: string;
+  trigger: {
+    name: string;
+    url: string;
+  };
 }

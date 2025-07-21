@@ -1,6 +1,16 @@
 import wList from "./exceptions.json";
-import { EvolutionDetails, EvoChain } from "./tipagens";
-
+import { EvolutionDetails, EvolutionList, PokemonStage } from "./tipagens";
+const exceptions = [
+  "magnezone",
+  "probopass",
+  "vikavolt",
+  "leafeon",
+  "glaceon",
+  "sylveon",
+  "dipplin",
+  "hydrapple",
+  "archaludon",
+];
 type Items = {
   name: string;
   url: string;
@@ -90,82 +100,133 @@ export function getEV(stats: any[]) {
     }));
 }
 
-export async function GetEvolution(url: string): Promise<EvoChain | null> {
-  try {
-    const specie = await GetSpecies(url);
-    const chainData = await fetch(specie.evolution_chain.url).then((r) =>
-      r.json()
-    );
+export async function GetEvolutionChain(url: string) {
+  const specie = await GetSpecies(url);
+  const evolution_chain = await fetch(specie.evolution_chain.url).then((res) =>
+    res.json()
+  );
+  const list: EvolutionList = [{ stage1: [] }, { stage2: [] }, { stage3: [] }];
 
-    const extractIdFromUrl = (url: string): number => {
-      const matches = url.match(/\/pokemon-species\/(\d+)\//);
-      return matches ? parseInt(matches[1]) : 0;
-    };
-
-    const getEvolutionDetails = (evolution: any): EvolutionDetails => {
-      return {
-        trigger: evolution?.evolution_details[0]?.trigger?.name || "unknown",
-        min_level: evolution?.evolution_details[0]?.min_level,
-        item: evolution?.evolution_details[0]?.item?.name,
-        min_happiness: evolution?.evolution_details[0]?.min_happiness,
-        min_affection: evolution?.evolution_details[0]?.min_affection,
-        time_of_day: evolution?.evolution_details[0]?.time_of_day,
-        known_move: evolution?.evolution_details[0]?.known_move,
-        held_item: evolution?.evolution_details[0]?.held_item,
-        location: evolution?.evolution_details[0]?.location,
-        needs_rain: evolution?.evolution_details[0]?.needs_rain,
-        upside_down: evolution?.evolution_details[0]?.upside_down,
-      };
-    };
-
-    const chain: EvoChain = {
-      stage1: {
-        id: extractIdFromUrl(chainData.chain.species.url),
-        name: chainData.chain.species.name,
-      },
-    };
-
-    if (chainData.chain.evolves_to.length >= 1) {
-      chain.stage2 = {
-        id: extractIdFromUrl(chainData.chain.evolves_to[0].species.url),
-        name: chainData.chain.evolves_to[0].species.name,
-        evolution_details: getEvolutionDetails(chainData.chain.evolves_to[0]),
-      };
-
-      if (chainData.chain.evolves_to[0].evolves_to.length >= 1) {
-        chain.stage3 = {
-          id: extractIdFromUrl(
-            chainData.chain.evolves_to[0].evolves_to[0].species.url
-          ),
-          name: chainData.chain.evolves_to[0].evolves_to[0].species.name,
-          evolution_details: getEvolutionDetails(
-            chainData.chain.evolves_to[0].evolves_to[0]
-          ),
-        };
-      }
-    }
-
-    return chain;
-  } catch (error) {
-    console.error("Error fetching evolution chain:", error);
+  if (evolution_chain.chain.evolves_to == 0) {
     return null;
   }
+
+  const stage2 = evolution_chain.chain.evolves_to;
+  const stage3 = stage2.flatMap((stage: PokemonStage) => stage.evolves_to);
+  list[0].stage1?.push({
+    name: evolution_chain.chain.species.name,
+    url: evolution_chain.chain.species.url,
+  });
+
+  if (stage2) {
+    stage2.forEach((stage: PokemonStage) => {
+      list[1].stage2?.push({
+        name: stage.species.name,
+        url: stage.species.url,
+        evolution_details: stage.evolution_details,
+      });
+    });
+  }
+
+  if (stage3) {
+    stage3.forEach((stage: PokemonStage) => {
+      list[2].stage3?.push({
+        name: stage.species.name,
+        url: stage.species.url,
+        evolution_details: stage.evolution_details,
+      });
+    });
+  }
+
+  return list;
 }
 
+export function getIDbyURL(url: string) {
+  const urlSemBarraFinal = url.endsWith("/") ? url.slice(0, -1) : url;
 
-export function getMainEvolutionMethod(details: EvolutionDetails | undefined): string {
-  if (!details) return "Evolui naturalmente";
-  
-  // Ordem de prioridade dos métodos
-  if (details.item) return `To Use ${details.item.split("-").join(" ")}`;
-  if (details.min_level) return `Level ${details.min_level}`;
-  if (details.min_happiness) return `Friendship ${details.min_happiness}+`;
-  if (details.known_move) return `Learned ${details.known_move.name.split("-").join(" ")}`;
-  if (details.time_of_day) return `Level up in the ${details.time_of_day}`;
-  if (details.location) return `Em ${details.location}`;
-  if (details.held_item) return `Trade Holding ${details.held_item.name.split("-").join(" ")}`;
-  if (details.needs_rain) return `Com chuva`;
-  if (details.upside_down) return `De cabeça para baixo`;
-  
-  return "Trade";
+  const partes = urlSemBarraFinal.split("/");
+  const ultimaParte = partes[partes.length - 1];
+  const num = parseInt(ultimaParte, 10);
+  if (num == 211) {
+    return `/sprites/Hisuian/normal/${num.toString().padStart(3, "0")}-hisuian.png`;
+  }
+  if (num == 83) {
+    return `/sprites/Galarian/normal/${num.toString().padStart(3, "0")}-galar.png`;
+  }
+  return `/sprites/Standart/normal/${num.toString().padStart(3, "0")}.png`;
+}
+
+export function getEvolutionDetails(
+  details: EvolutionDetails[] | undefined,
+  name?: string | undefined
+) {
+  if (!details) {
+    return "";
+  }
+
+  if (name && exceptions.includes(name)) {
+    return exceptionsPokemons(name);
+  }
+  if (details[0].trigger.name == "level-up") {
+    if (details[0].time_of_day != "") {
+      if (details[0].held_item != null) {
+        return `Hold ${details[0].held_item.name}, ${details[0].time_of_day}Time`;
+      }
+      return `High Friendship, ${details[0].time_of_day}Time`;
+    }
+    if (details[0].known_move_type != null) {
+      return `after ${details[0].known_move_type.name}-type move learned`;
+    }
+    if (details[0].min_happiness != null) {
+      return `high Friendship`;
+    }
+
+    if (details[0].gender == 1) {
+      return `Level ${details[0].min_level}, Female`;
+    }
+
+    if (details[0].gender == 2) {
+      return `Level ${details[0].min_level}, Male`;
+    }
+
+    return `Level ${details[0].min_level}`;
+  }
+
+  if (details[0].trigger.name == "use-item") {
+    if (details[0].gender == 2) {
+      return `Use ${details[0].item?.name}, Male`;
+    }
+    if (details[0].gender == 1) {
+      return `Use ${details[0].item?.name}, Female`;
+    }
+    return `Use ${details[0].item?.name}`;
+  }
+
+  if (details[0].trigger.name == "trade") {
+    if (details[0].held_item != null) {
+      return `trade holding, ${details[0].held_item.name}`;
+    }
+  }
+  return details[0].trigger.name;
+}
+
+function exceptionsPokemons(name: string) {
+  if (name == "magnezone" || name == "probopass" || name == "vikavolt") {
+    return "use Thunder Stone, in Gen 8+, or level up in a Magnetic Field area";
+  }
+
+  switch (name) {
+    case "leafeon":
+      return "use Leaf Stone, or level up near a Moss-rock";
+    case "glaceon":
+      return "use Ice Stone, or level up near an Ice-rock";
+    case "sylveon":
+      return "after Fairy-type move learned, and either ♥♥ Affection in Gen 6-7 or high friendship in Gen 8+";
+    case "dipplin":
+      return "use Syrupy Apple";
+    case "hydrapple":
+      return "after Dragon Cheer learned";
+    case "archaludon":
+      return "use Metal Alloy";
+  }
 }
