@@ -38,7 +38,7 @@ export function Content() {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-8 gap-4 p-6 place-items-center">
+      <div className="grid grid-cols-8 gap-4 p-6 place-items-center z-0">
         {Array.from({ length: 48 }, (_, i) => {
           return <Skeleton className="w-36 h-48 bg-white/10" key={i} />;
         })}
@@ -48,7 +48,7 @@ export function Content() {
 
   return (
     <>
-      <main className="grid grid-cols-8 gap-4 p-6 place-items-center">
+      <main className="grid grid-cols-8 gap-4 p-6 place-items-center z-0">
         {pokemons.map((p) => (
           <Link href={`/pokemon/${p.name}`}  key={p.id}>
             <PokeCards pokemon={p}/>
