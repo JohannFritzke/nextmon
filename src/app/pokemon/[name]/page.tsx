@@ -8,12 +8,11 @@ import { InfoTable } from "@/components/infoTable/infoTable";
 import { Type } from "@/app/api/tipagens";
 import { EvolutionChain } from "@/components/evolutionChain/evolutionChain";
 
-export default async function pokePage({
+export default async function Page({
   params,
 }: {
   params: { name: string };
 }) {
-  
   const pokemon = await GetPokemon(params.name);
   const number = pokemon.id.toString().padStart(3, "0");
   const type = pokemon.types[0].type.name;
@@ -69,7 +68,7 @@ export default async function pokePage({
             <InfoTable pokemon={pokemon} />
           </div>
 
-          <EvolutionChain url={pokemon.species.url} id={pokemon.id}/>
+          <EvolutionChain url={pokemon.species.url} id={pokemon.id} />
         </div>
       </main>
 
