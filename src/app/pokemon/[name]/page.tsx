@@ -7,13 +7,8 @@ import { BaseStats } from "@/components/baseStats/baseStats";
 import { InfoTable } from "@/components/infoTable/infoTable";
 import { Type } from "@/app/api/tipagens";
 import { EvolutionChain } from "@/components/evolutionChain/evolutionChain";
-import React from "react";
 
-type Props = {
-  params: { name: string };
-};
-
-const Page: React.FC<Props> = async ({ params }) => {
+export default async function Page({ params }: { params: { name: string } }){
   const pokemon = await GetPokemon(params.name);
   const number = pokemon.id.toString().padStart(3, "0");
   const type = pokemon.types[0].type.name;
@@ -77,5 +72,3 @@ const Page: React.FC<Props> = async ({ params }) => {
     </div>
   );
 }
-
-export default Page;
