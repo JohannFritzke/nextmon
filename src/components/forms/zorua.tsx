@@ -1,30 +1,29 @@
 import { MoveRight } from "lucide-react";
 import Image from "next/image";
 
-export function Voltorb() {
+export function Zorua() {
   return (
     <div className="flex justify-around items-center flex-1 p-2">
       <div className="flex flex-col gap-2">
         <div className="flex">
           <div className="w-[96px] h-[96px] bg-white/5 rounded-full z-0 absolute"></div>
-          <a href={`/pokemon/voltorb`} className="z-1">
+          <a href={`/pokemon/zorua`} className="z-1">
             <Image
               alt=""
               width={96}
               height={96}
-              src="/sprites/Standart/normal/100.png"
+              src="/sprites/Standart/normal/570.png"
             />
           </a>
         </div>
-
         <div className="flex">
           <div className="w-[96px] h-[96px] bg-white/5 rounded-full z-0 absolute"></div>
-          <a href={`/pokemon/voltorb`} className="z-1">
+          <a href={`/pokemon/zorua`} className="z-1">
             <Image
               alt=""
               width={96}
               height={96}
-              src="/sprites/Hisuian/normal/100-hisuian.png"
+              src="/sprites/Hisuian/normal/570-hisuian.png"
             />
           </a>
         </div>
@@ -36,7 +35,7 @@ export function Voltorb() {
           <MoveRight />
         </span>
         <span className="flex flex-col items-center">
-          use Leaf Stone
+          Level 30, in Legends: Arceus
           <MoveRight />
         </span>
       </div>
@@ -44,24 +43,24 @@ export function Voltorb() {
       <div className="flex flex-col gap-2">
         <div className="flex">
           <div className="w-[96px] h-[96px] bg-white/5 rounded-full z-0 absolute"></div>
-          <a href={`/pokemon/electrode`} className="z-1">
+          <a href={`/pokemon/zoroark`} className="z-1">
             <Image
               alt=""
               width={96}
               height={96}
-              src="/sprites/Standart/normal/101.png"
+              src="/sprites/Standart/normal/571.png"
             />
           </a>
         </div>
 
         <div className="flex">
           <div className="w-[96px] h-[96px] bg-white/5 rounded-full z-0 absolute"></div>
-          <a href={`/pokemon/electrode`} className="z-1">
+          <a href={`/pokemon/zoroark`} className="z-1">
             <Image
               alt=""
               width={96}
               height={96}
-              src="/sprites/Hisuian/normal/101-hisuian.png"
+              src="/sprites/Hisuian/normal/571-hisuian.png"
             />
           </a>
         </div>

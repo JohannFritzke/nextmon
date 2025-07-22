@@ -26,8 +26,8 @@ export function PokemonEvolutionLine({ line }: PokemonEvolutionLineProps) {
 
       <div className="flex flex-col h-full justify-around text-xs w-35 text-center capitalize">
         {evolution[1].stage2?.map((s, index) => (
-          <span key={index} className="flex flex-col items-center">
-            {getEvolutionDetails(s.evolution_details, s.name)}
+          <span key={index} className="flex flex-col items-center h-[96px] justify-center">
+            {getEvolutionDetails(s.evolution_details, s.name)?.replace("-"," ")}
             <MoveRight />
           </span>
         ))}
@@ -56,11 +56,11 @@ export function PokemonEvolutionLine({ line }: PokemonEvolutionLineProps) {
           {evolution[2].stage3?.map((s, index) => (
             <span
               key={index}
-              className={`flex flex-col items-center h-full ${
-                s.name == "hydrapple" ? "justify-end pb-6" : "justify-center"
+              className={`flex flex-col items-center ${
+                s.name == "hydrapple" ? "justify-end pb-6 h-full" : "justify-center h-[96px] "
               }`}
             >
-              {getEvolutionDetails(s.evolution_details, s.name)}
+              {getEvolutionDetails(s.evolution_details, s.name)?.replace("-"," ")}
               <MoveRight />
             </span>
           ))}
@@ -72,7 +72,7 @@ export function PokemonEvolutionLine({ line }: PokemonEvolutionLineProps) {
             <div
               key={index}
               className={`flex h-full ${
-                stage.name == "hydrapple" ? "items-end pb-1" : "items-center"
+                stage.name == "hydrapple" ? "items-end pb-2" : "items-center"
               }`}
             >
               <div className="w-[96px] h-[96px] bg-white/5 rounded-full z-0 absolute"></div>

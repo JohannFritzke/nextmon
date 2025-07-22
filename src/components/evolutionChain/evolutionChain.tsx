@@ -54,6 +54,31 @@ export async function EvolutionChain({ url,id }: { url: string,id:number }) {
             case 867: return <Forms.Yamask/>
             case 58: return <Forms.Growlithe/> 
             case 59: return <Forms.Growlithe/>  
+            case 100: return <Forms.Voltorb/>
+            case 101: return <Forms.Voltorb/>
+            case 215: return <Forms.Sneasel/>
+            case 461: return <Forms.Sneasel/>
+            case 903: return <Forms.Sneasel/>
+            case 155: return <Forms.Cyndaquil/>
+            case 156: return <Forms.Cyndaquil/>
+            case 157: return <Forms.Cyndaquil/>
+            case 501: return <Forms.Oshawott/>
+            case 502: return <Forms.Oshawott/>
+            case 503: return <Forms.Oshawott/>
+            case 548: return <Forms.Petilil/>
+            case 549: return <Forms.Petilil/>
+            case 570: return <Forms.Zorua/>
+            case 571: return <Forms.Zorua/>
+            case 627: return <Forms.Rufflet/>
+            case 628: return <Forms.Rufflet/>
+            case 704: return <Forms.Goomy/>
+            case 705: return <Forms.Goomy/>
+            case 706: return <Forms.Goomy/>
+            case 712: return <Forms.Bergmite/>
+            case 713: return <Forms.Bergmite/>
+            case 722: return <Forms.Rowlet/>
+            case 723: return <Forms.Rowlet/>
+            case 724: return <Forms.Rowlet/>
             default: return <PokemonEvolutionLine line={[evolution]} />
           }
         })()

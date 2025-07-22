@@ -15,4 +15,14 @@ export * from "./zigzagoon";
 export * from "./darumaka";
 export * from "./yamask";
 export * from "./growlithe";
+export * from "./voltorb";
+export * from "./sneasel";
+export * from "./cyndaquil";
+export * from "./oshawott";
+export * from "./petilil";
+export * from "./zorua";
+export * from "./rufflet";
+export * from "./goomy";
+export * from "./bergmite";
+export * from "./rowlet";
 

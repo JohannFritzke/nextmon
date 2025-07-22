@@ -10,6 +10,7 @@ const exceptions = [
   "dipplin",
   "hydrapple",
   "archaludon",
+  "overqwil"
 ];
 type Items = {
   name: string;
@@ -167,6 +168,8 @@ export function getEvolutionDetails(
     return "";
   }
 
+  console.log(details)
+
   if (name && exceptions.includes(name)) {
     return exceptionsPokemons(name);
   }
@@ -231,5 +234,6 @@ function exceptionsPokemons(name: string) {
       return "after Dragon Cheer learned";
     case "archaludon":
       return "use Metal Alloy";
+    case "overqwil": return "use Barb Barrage 20 times in Strong Style"
   }
 }
