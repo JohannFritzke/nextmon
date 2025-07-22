@@ -12,7 +12,13 @@ export type Type = {
 export type PokemonProps = {
   species: { url: string };
   base_experience: number;
-  abilities: any[];
+  abilities: {
+    ability: {
+      name: string;
+    };
+    is_hidden: boolean;
+    slot: number;
+  };
   weight: number;
   stats: {
     base_stat: number;
@@ -23,7 +29,6 @@ export type PokemonProps = {
     };
   }[];
 };
-
 export interface PokemonStage {
   species: {
     name: string;
@@ -32,7 +37,12 @@ export interface PokemonStage {
   evolution_details?: EvolutionDetails[];
   evolves_to?: PokemonStage[];
 }
-
+export type StatEV = {
+  effort: number;
+  stat: {
+    name: string;
+  };
+};
 interface EvolutionStage {
   id?: number;
   name: string;
@@ -46,12 +56,12 @@ export type EvolutionList = [
 ];
 
 export interface EvolutionDetails {
-  gender: number
+  gender: number;
   min_level: string;
   min_happiness: string;
-  held_item:{
-    name: string
-  }
+  held_item: {
+    name: string;
+  };
   known_move_type: {
     name: string;
   };

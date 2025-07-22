@@ -1,5 +1,5 @@
 import wList from "./exceptions.json";
-import { EvolutionDetails, EvolutionList, PokemonStage } from "./tipagens";
+import { EvolutionDetails, EvolutionList, PokemonStage, StatEV } from "./tipagens";
 const exceptions = [
   "magnezone",
   "probopass",
@@ -94,7 +94,7 @@ export async function GetSpecies(url: string) {
   return resp;
 }
 
-export function getEV(stats: any[]) {
+export function getEV(stats: StatEV[]) {
   return stats
     .filter((stat) => stat.effort > 0)
     .map((s) => ({
