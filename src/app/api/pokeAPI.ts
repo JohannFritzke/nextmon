@@ -70,6 +70,9 @@ export async function Get(
 }
 
 export async function GetPokemon(name: string) {
+  if(name == "darmanitan"){
+    name = "darmanitan-standard"
+  }
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
     next: { revalidate: 3600 }, // Cache de 1 hora
   });
@@ -150,7 +153,7 @@ export function getIDbyURL(url: string) {
   if (num == 211) {
     return `/sprites/Hisuian/normal/${num.toString().padStart(3, "0")}-hisuian.png`;
   }
-  if (num == 83) {
+  if (num == 83 || num == 222) {
     return `/sprites/Galarian/normal/${num.toString().padStart(3, "0")}-galar.png`;
   }
   return `/sprites/Standart/normal/${num.toString().padStart(3, "0")}.png`;

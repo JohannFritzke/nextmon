@@ -13,6 +13,7 @@ export default async function pokePage({
 }: {
   params: { name: string };
 }) {
+  
   const pokemon = await GetPokemon(params.name);
   const number = pokemon.id.toString().padStart(3, "0");
   const type = pokemon.types[0].type.name;
@@ -68,7 +69,7 @@ export default async function pokePage({
             <InfoTable pokemon={pokemon} />
           </div>
 
-          <EvolutionChain url={pokemon.species.url}/>
+          <EvolutionChain url={pokemon.species.url} id={pokemon.id}/>
         </div>
       </main>
 

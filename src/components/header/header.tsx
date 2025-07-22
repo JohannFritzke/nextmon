@@ -6,7 +6,7 @@ export function Header() {
     <header className="w-full h-30 flex flex-col justify-center items-center bg-white/5 backdrop-blur-sm shadow-xl gap-5">
       <div className="flex items-center gap-2">
         <Image src="/imgs/icon.svg" alt="NextMon" width={30} height={30} priority />
-        <h1 className="text-xl">NextMon</h1>
+        <h1 className="text-xl"><a href="/">NextMon</a></h1>
       </div>
       <div className="flex w-100 shadow-lg ">
         <Input
