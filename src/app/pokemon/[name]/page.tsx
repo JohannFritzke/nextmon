@@ -8,7 +8,8 @@ import { InfoTable } from "@/components/infoTable/infoTable";
 import { Type } from "@/app/api/tipagens";
 import { EvolutionChain } from "@/components/evolutionChain/evolutionChain";
 
-export default async function Page({ params }: { params: { name: string } }){
+export default async function Page(props: { params: Promise<{ name: string }> }) {
+   const params = await props.params;
   const pokemon = await GetPokemon(params.name);
   const number = pokemon.id.toString().padStart(3, "0");
   const type = pokemon.types[0].type.name;
