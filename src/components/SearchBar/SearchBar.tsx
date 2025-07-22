@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "../ui/input";
 import { Search } from "lucide-react";
+import Image from "next/image";
 
 type Suggestion = {
   name: string;
@@ -68,10 +69,11 @@ export function SearchBar() {
                 onClick={() => handleSelect(pokemon.name)}
                 className="flex items-center gap-2 px-4 py-2 hover:bg-gray-700 cursor-pointer"
               >
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-                  alt={pokemon.name}
-                  className="w-6 h-6"
+                <Image
+                  src={`/sprites/Standart/normal/${id?.toString().padStart(3,"0")}.png`}
+                  alt=""
+                  width={44}
+                  height={44}
                 />
                 <span className="capitalize text-white">{pokemon.name}</span>
               </li>

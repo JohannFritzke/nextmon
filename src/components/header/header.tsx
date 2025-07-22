@@ -1,5 +1,3 @@
-import { Search } from "lucide-react";
-import { Input } from "../ui/input";
 import Image from "next/image";
 import Link from "next/link";
 import { SearchBar } from "../SearchBar/SearchBar";
