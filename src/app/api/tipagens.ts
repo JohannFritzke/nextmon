@@ -18,7 +18,7 @@ export type PokemonProps = {
     };
     is_hidden: boolean;
     slot: number;
-  };
+  }[];
   weight: number;
   stats: {
     base_stat: number;
